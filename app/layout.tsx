@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import { ReactQueryProvider } from "app/ReactQueryProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "styles/globals.css";
 
 export const metadata: Metadata = {
@@ -14,9 +17,14 @@ const vazirFont = Vazirmatn({ subsets: ["latin"] });
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html dir="rtl" lang="fa">
-      <body className={vazirFont.className}>{children}</body>
-    </html>
+    <ReactQueryProvider>
+      <html dir="rtl" lang="fa">
+        <body className={vazirFont.className}>
+          {children}
+          <ToastContainer rtl />
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 };
 
