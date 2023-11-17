@@ -1,3 +1,5 @@
+"use client";
+
 type CardProps = {
   description: string;
   id: string;
@@ -7,7 +9,7 @@ type CardProps = {
   view: number;
 };
 
-const Card = async ({ item }: { item: CardProps }) => {
+const Card = ({ item }: { item: CardProps }) => {
   return (
     <>
       <div className="w-full h-full flex flex-col border rounded-lg shadow">

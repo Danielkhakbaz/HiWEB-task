@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "hooks/useAuth";
 import { toast } from "react-toastify";
-import Loading from "./loading/loading";
+import Loading from "app/loading";
 
 const LoginForm = () => {
   const { login } = useAuth();

@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Card from "./_components/card/card";
+import Card from "app/products/_components/card/card";
 import { useProducts } from "hooks/useQuery";
 import EmptyCart from "assets/images/empty-cart.png";
+import Loading from "app/loading";
 
 type CardProps = {
   description: string;
@@ -15,8 +16,22 @@ type CardProps = {
 };
 
 const ProductsPage = () => {
-  const { data, error, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useProducts();
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useProducts();
+
+  if (isLoading) {
+    return (
+      <main className="w-full min-h-[calc(100vh-6rem)] flex justify-center items-center">
+        <Loading />
+      </main>
+    );
+  }
 
   if (error instanceof Error) {
     throw new Error(error.message);
