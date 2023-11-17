@@ -7,6 +7,10 @@ const call = async (page: number) => {
       count: 6,
       skip: (page - 1) * 6,
     },
+  }).then((res) => {
+    sessionStorage.setItem("totalRowCount", res.data.data.totalRowCount);
+
+    return res;
   });
 };
 
@@ -16,7 +20,10 @@ export const useProducts = () => {
     queryFn: ({ pageParam = 1 }) => call(pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.data.data.list.length === 0) {
+      if (
+        lastPageParam ===
+        Math.ceil((sessionStorage.getItem("totalRowCount") as never) / 6)
+      ) {
         return undefined;
       }
       return lastPageParam + 1;
