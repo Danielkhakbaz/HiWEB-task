@@ -3,7 +3,7 @@ import Navbar from "layout/navbar/navbar";
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <main className="px-8 py-4">
+      <main className="px-8 py-5">
         <Navbar />
         {children}
       </main>

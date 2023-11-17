@@ -30,8 +30,14 @@ const LoginPage = () => {
 
       navigate.push("/products");
     },
-    onError: () => {
-      toast.error("نام‌کاربری یا رمزعبور اشتباه است!", {
+    onError: (error: {
+      response: {
+        data: {
+          error: string;
+        };
+      };
+    }) => {
+      toast.error(error.response.data.error, {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
