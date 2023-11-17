@@ -11,16 +11,22 @@ const Card = async ({ item }: { item: CardProps }) => {
   return (
     <>
       <div className="w-full h-full flex flex-col border rounded-lg shadow">
+        {
+          // Issue: Unable to use <Image /> tag from next/image.
+          // Description: The tag is throwing an error related to an incorrect SSL certificate, although I believe this shouldn't be the case.
+          // Example usage:
+          // <Image width="..." height="..." src="..." alt="..." />
+        }
         <img src={item.imageUrl} alt="" />
         <div className="h-full flex flex-col justify-between gap-4 p-4">
           <h4>{item.title}</h4>
-          <p className="text-[#5C5C5C] text-[12px] flex-1">
+          <p className="text-hiwebGray-500 text-xs flex-1">
             {item.description.length > 45
               ? `${item.description.substring(0, 60)}...`
               : item.description}
           </p>
-          <p className="text-[14px]">
-            <span className="text-[#A0A0A0]">قیمت:</span>{" "}
+          <p className="text-sm">
+            <span className="text-hiwebGray-300">قیمت:</span>{" "}
             {item.view.toLocaleString("fa")}
           </p>
         </div>

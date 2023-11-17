@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "hooks/useAuth";
 
 export const API = axios.create({
   baseURL: "https://taskapi.hiweb.ir/api/",
@@ -14,11 +15,29 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// API.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     console.log("INTERCEPTOR is handling", error);
-//   }
-// );
+API.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    // const originalRequest = error.config;
+
+    if (error.response) {
+      switch (error.response.status) {
+        case 401: {
+          const { refreshAccessToken } = useAuth();
+
+          const token = await refreshAccessToken();
+
+          // originalRequest._retry = false;
+
+          // originalRequest.headers["Authorization"] = `Bearer ${token}`;
+
+          // return API(originalRequest);
+        }
+        default:
+          break;
+      }
+    }
+  }
+);

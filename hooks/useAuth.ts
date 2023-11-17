@@ -15,28 +15,30 @@ export const useAuth = () => {
     });
   };
 
-  //   const router = useRouter();
+  const redirectToLogin = async () => {
+    const router = useRouter();
 
-  //   const redirectToLogin = async () => {
-  //     router.push("/");
-  //   };
+    router.push("/");
+  };
 
-  //   const refreshAccessToken = async () => {
-  // try {
-  //   const refreshToken = localStorage.getItem("refresh-token");
-  //   const response = await axios.post("/api/token", {
-  //     refreshToken,
-  //   });
-  //   const { token } = response.data;
+  const refreshAccessToken = async () => {
+    try {
+      const response = await API.post("/Security/UserLogin/RefreshToken", {
+        username: localStorage.getItem("username"),
+        refreshToken: localStorage.getItem("refresh_token"),
+      });
 
-  //   localStorage.setItem("access-token", token);
-  //   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const { token } = response.data;
 
-  //   return token;
-  // } catch {
-  // redirectToLogin();
-  // }
-  //   };
+      localStorage.setItem("access_token", token);
 
-  return { login };
+      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      return token;
+    } catch {
+      redirectToLogin();
+    }
+  };
+
+  return { login, redirectToLogin, refreshAccessToken };
 };

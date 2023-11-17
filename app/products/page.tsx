@@ -15,32 +15,57 @@ type CardProps = {
 };
 
 const ProductsPage = () => {
-  const { data } = useProducts();
+  const {
+    data,
+    error,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useProducts();
+
+  if (error instanceof Error) {
+    throw new Error(error.message);
+  }
 
   return (
     <>
-      {data?.data.data.totalRowCount !== 0 ? (
-        <div
-          className="grid gap-6 py-4"
-          style={{
-            gridTemplateColumns: "repeat(auto-fill, 300px)",
-            justifyContent: "center",
-          }}
-        >
-          {data?.data.data.list.map((item: CardProps) => (
-            <Card key={item.id} item={item} />
-          ))}
-        </div>
-      ) : (
+      {data?.pages[0].data.data.totalRowCount !== 0 ? (
         <>
-          <div className="w-full h-full flex flex-col flex-1 justify-center items-center py-4">
-            <Image
-              src={EmptyCart}
-              alt="This image is getting shown whenever the cart is empty!"
-            />
-            <span className="text-[#ABABAB]">محصول خود را وارد نمایید.</span>
+          <div
+            className="grid gap-6 py-4"
+            style={{
+              gridTemplateColumns: "repeat(auto-fill, 300px)",
+              justifyContent: "center",
+            }}
+          >
+            {data?.pages.map((page) =>
+              page.data.data.list.map((item: CardProps) => (
+                <Card key={item.id} item={item} />
+              ))
+            )}
           </div>
+          {hasNextPage && (
+            <div className="w-full flex justify-center">
+              <button
+                className="w-fit bg-green-400 text-[14px] rounded-lg transition-colors my-4 px-4 py-3 hover:bg-green-500 active:bg-green-600"
+                onClick={() => fetchNextPage()}
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
+                {isFetchingNextPage
+                  ? "منتظر بمانید..."
+                  : hasNextPage && "مشاهده بیشتر..."}
+              </button>
+            </div>
+          )}
         </>
+      ) : (
+        <div className="w-full h-full flex flex-col flex-1 justify-center items-center py-4">
+          <Image
+            src={EmptyCart}
+            alt="This image is getting shown whenever the cart is empty!"
+          />
+          <span className="text-[#ABABAB]">محصول خود را وارد نمایید.</span>
+        </div>
       )}
     </>
   );

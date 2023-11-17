@@ -1,5 +1,5 @@
 const Loading = async () => {
-  return <></>;
+  return <>...</>;
 };
 
 export default Loading;

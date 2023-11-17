@@ -1,9 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { API } from "services/interceptor";
 
+const call = async (page: number) => {
+  return await API.get("/General/Product/ProductList", {
+    params: {
+      count: 6,
+      skip: (page - 1) * 6,
+    },
+  });
+};
+
 export const useProducts = () => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["products"],
-    queryFn: async () => await API.get("/General/Product/ProductList"),
+    queryFn: ({ pageParam = 1 }) => call(pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.data.data.list.length === 0) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
   });
 };
