@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Card from "app/_components/card/card";
+import Card from "./_components/card/card";
 import { useProducts } from "hooks/useQuery";
 import EmptyCart from "assets/images/empty-cart.png";
 

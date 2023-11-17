@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "hooks/useAuth";
 import { toast } from "react-toastify";
-import Loading from "app/_components/loading/loading";
+import Loading from "./loading/loading";
 
 const LoginForm = () => {
   const { login } = useAuth();
@@ -83,15 +83,15 @@ const LoginForm = () => {
         />
       </div>
       <div className="flex gap-1">
-        <label className="text-hiwebGray-300" htmlFor="rememberme">
-          مرا به خاطر بسپار
-        </label>
         <input
           id="rememberme"
           className="text-sm border border-hiwebGray-400 rounded-lg p-2.5"
           type="checkbox"
           placeholder="کلمه عبور..."
         />
+        <label className="text-hiwebGray-300" htmlFor="rememberme">
+          مرا به خاطر بسپار
+        </label>
       </div>
       <button
         className="w-full bg-hiwebGreen-500 text-white rounded-lg transition-colors py-3 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900 disabled:text-hiwebGray-700 disabled:bg-hiwebGray-100"
