@@ -24,6 +24,7 @@ const LoginPage = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: ({ data: { data } }) => {
+      localStorage.setItem("username", data.userName);
       localStorage.setItem("access_token", data.accessToken.access_token);
       localStorage.setItem("refresh_token", data.accessToken.refresh_token);
 
