@@ -21,7 +21,7 @@ const Navbar = async () => {
 
   return (
     <>
-      <nav className="w-full flex justify-between items-center border-[#A0A0A0] border-b pb-4">
+      <nav className="w-full h-14 flex justify-between items-center border-[#A0A0A0] border-b pb-4">
         <p className="text-[#5C5C5C]">لیست محصولات</p>
         <div className="flex items-center gap-6">
           <button className="bg-[#46B666] text-white flex items-center gap-2 rounded-lg transition-colors px-12 py-2 hover:bg-[#3a9e57] active:bg-[#328c4c]">
