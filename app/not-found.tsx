@@ -14,11 +14,10 @@ const NotFound = async () => {
               صفحه‌ای یافت نشد!
             </h3>
             <Link href="/">
-              <button
-                className="bg-[#46B666] text-white flex items-center gap-2 transition-colors rounded-lg py-2 px-4 hover:bg-[#3a9e57] active:bg-[#328c4c]"
-              ><span>صفحه‌اصلی</span>
-                    <FaHome />
-                </button>
+              <button className="bg-[#46B666] text-white flex items-center gap-2 transition-colors rounded-lg py-2 px-4 hover:bg-[#3a9e57] active:bg-[#328c4c]">
+                <span>صفحه‌اصلی</span>
+                <FaHome />
+              </button>
             </Link>
           </div>
         </div>

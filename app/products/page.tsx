@@ -15,13 +15,8 @@ type CardProps = {
 };
 
 const ProductsPage = () => {
-  const {
-    data,
-    error,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useProducts();
+  const { data, error, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useProducts();
 
   if (error instanceof Error) {
     throw new Error(error.message);
