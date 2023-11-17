@@ -7,7 +7,7 @@ const LogoutButton = () => {
   return (
     <Link href="/">
       <button
-        className="text-hiwebRed-500 flex items-center gap-1 rounded transition-colors px-3 py-2 hover:bg-red-50 active:bg-red-100"
+        className="text-hiwebRed-500 flex items-center gap-1 rounded-lg transition-colors px-3 py-2 hover:bg-red-50 active:bg-red-100"
         onClick={() => localStorage.clear()}
       >
         <FaPowerOff />

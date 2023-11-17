@@ -20,8 +20,12 @@ const config: Config = {
         500: "#FF6666",
       },
       hiwebGray: {
+        100: "#CCCCCC",
+        200: "#ABABAB",
         300: "#A0A0A0",
+        400: "#9A9A9A",
         500: "#5C5C5C",
+        700: "#666666",
       },
     },
   },

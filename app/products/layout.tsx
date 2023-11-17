@@ -1,12 +1,16 @@
 import Navbar from "layout/navbar/navbar";
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+type LayoutProps = {
+  children: React.ReactNode;
+};
+
+const Layout = async ({ children }: LayoutProps) => {
   return (
     <>
-      <main className="min-h-screen flex flex-col px-8 py-5">
+      <div className="min-h-screen flex flex-col px-8 py-5">
         <Navbar />
         {children}
-      </main>
+      </div>
     </>
   );
 };

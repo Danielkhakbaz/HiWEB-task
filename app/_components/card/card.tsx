@@ -17,8 +17,8 @@ const Card = async ({ item }: { item: CardProps }) => {
           // Example usage:
           // <Image width="..." height="..." src="..." alt="..." />
         }
-        <img src={item.imageUrl} alt="" />
-        <div className="h-full flex flex-col justify-between gap-4 p-4">
+        <img className="rounded-lg" src={item.imageUrl} alt="" />
+        <section className="h-full flex flex-col justify-between gap-4 p-4">
           <h4>{item.title}</h4>
           <p className="text-hiwebGray-500 text-xs flex-1">
             {item.description.length > 45
@@ -29,7 +29,7 @@ const Card = async ({ item }: { item: CardProps }) => {
             <span className="text-hiwebGray-300">قیمت:</span>{" "}
             {item.view.toLocaleString("fa")}
           </p>
-        </div>
+        </section>
       </div>
     </>
   );
