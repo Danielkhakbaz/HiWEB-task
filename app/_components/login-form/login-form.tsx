@@ -91,7 +91,7 @@ const LoginForm = () => {
     return () => {
       clearTimeout(goToProductsPage);
     };
-  });
+  }, [router]);
 
   if (isSuccess) {
     return (

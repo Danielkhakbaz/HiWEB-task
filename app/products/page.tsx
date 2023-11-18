@@ -10,9 +10,8 @@ type CardProps = {
   description: string;
   id: string;
   imageUrl: string;
-  rate: number;
   title: string;
-  view: number;
+  price: number;
 };
 
 const ProductsPage = () => {
