@@ -5,8 +5,6 @@ export const API = axios.create({
   baseURL: "https://taskapi.hiweb.ir/api/",
 });
 
-const { refreshAccessToken } = useAuth();
-
 let isRefreshing = false;
 let refreshSubscribers: any[] = [];
 
@@ -35,9 +33,12 @@ API.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401: {
+          const { refreshAccessToken } = useAuth();
+
+          const token = await refreshAccessToken();
+
           if (!isRefreshing) {
             isRefreshing = true;
-            const token = await refreshAccessToken();
 
             isRefreshing = false;
             onRefreshed(token);
