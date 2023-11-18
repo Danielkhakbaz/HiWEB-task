@@ -8,7 +8,7 @@ export const useGetProducts = () => {
     queryKey: ["products"],
     queryFn: ({ pageParam = 1 }) => getProducts(pageParam),
     initialPageParam: 1,
-    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+    getNextPageParam: (_lastPage, _allPages, lastPageParam) => {
       if (
         lastPageParam ===
         Math.ceil((sessionStorage.getItem("totalRowCount") as never) / 6)

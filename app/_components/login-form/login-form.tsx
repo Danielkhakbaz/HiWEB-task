@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "hooks/useAuth";
 import { toast } from "react-toastify";
 import Loading from "app/loading";
+import SuccessfulLogin from "assets/images/successful-login.png";
 
 const LoginForm = () => {
   const [isRemembered, setIsRemembered] = useState<boolean>(false);
@@ -21,7 +23,9 @@ const LoginForm = () => {
     formState: { isValid },
   } = useForm();
 
-  const { mutate, isPending } = useMutation({
+  let goToProductsPage: NodeJS.Timeout;
+
+  const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: login,
     onSuccess: ({ data: { data } }) => {
       localStorage.setItem("username", data.userName);
@@ -32,7 +36,9 @@ const LoginForm = () => {
         data.accessToken.expire_access_token
       );
 
-      router.push("/products");
+      goToProductsPage = setTimeout(() => {
+        router.push("/products");
+      }, 2000);
     },
     onError: (error: {
       response: {
@@ -84,10 +90,24 @@ const LoginForm = () => {
     };
 
     isAccessTokenValid();
+
+    return () => {
+      clearTimeout(goToProductsPage);
+    };
   }, [router]);
 
+  if (isSuccess) {
+    return (
+      <div className="w-3/5 h-4/5 flex flex-col justify-center items-center gap-10 border border-hiwebGray-400 rounded-xl px-10 py-14">
+        <Image width={64} height={64} src={SuccessfulLogin} alt="" />
+        <p className="text-hiwebGreen-500">ورود شما با موفقیت انجام شد.</p>
+        <Loading />
+      </div>
+    );
+  }
+
   return (
-    <form className="w-3/5 flex flex-col gap-6 border border-hiwebGray-400 rounded-xl px-10 py-14">
+    <form className="w-3/5 flex flex-col justify-center gap-6 border border-hiwebGray-400 rounded-xl px-10 py-14">
       <div className="flex flex-col gap-2">
         <label className="text-hiwebGray-300" htmlFor="username">
           نام کاربری
