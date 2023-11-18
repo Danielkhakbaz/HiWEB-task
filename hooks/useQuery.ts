@@ -3,7 +3,7 @@ import { useAPI } from "hooks/useAPI";
 
 const { getProducts } = useAPI();
 
-export const useProducts = () => {
+export const useGetProducts = () => {
   return useInfiniteQuery({
     queryKey: ["products"],
     queryFn: ({ pageParam = 1 }) => getProducts(pageParam),

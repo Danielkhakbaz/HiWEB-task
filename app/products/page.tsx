@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Card from "app/products/_components/card/card";
-import { useProducts } from "hooks/useQuery";
+import { useGetProducts } from "hooks/useQuery";
 import EmptyCart from "assets/images/empty-cart.png";
 import Loading from "app/loading";
 
@@ -23,7 +23,7 @@ const ProductsPage = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useProducts();
+  } = useGetProducts();
 
   if (isLoading) {
     return (

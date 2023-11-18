@@ -1,36 +1,9 @@
-"use client";
-
-import { useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import LoginForm from "app/_components/login-form/login-form";
 import LandingImage from "assets/images/landing-image.png";
 import HiWEBLogo from "public/hiweb-logo.png";
 
-const LoginPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const isAccessTokenValid = () => {
-      const expireDateObject = new Date(
-        localStorage.getItem("access_token_expire_date") as never
-      );
-
-      const expireTimestamp = Math.floor(expireDateObject.getTime() / 1000);
-
-      const currentTimestamp = Math.floor(Date.now() / 1000);
-
-      if (
-        expireTimestamp > currentTimestamp &&
-        localStorage.getItem("isRemembered") === "true"
-      ) {
-        router.push("/products");
-      }
-    };
-
-    isAccessTokenValid();
-  }, [router]);
-
+const LoginPage = async () => {
   return (
     <>
       <main className="h-screen flex flex-row">

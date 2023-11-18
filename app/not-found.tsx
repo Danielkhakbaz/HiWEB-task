@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaHome } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
 
 const NotFound = async () => {
   return (
@@ -16,7 +16,7 @@ const NotFound = async () => {
           <Link href="/">
             <button className="bg-hiwebGreen-500 text-white flex items-center gap-2 transition-colors rounded-lg px-4 py-2 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900">
               <span>صفحه‌اصلی</span>
-              <FaHome />
+              <FaHouse />
             </button>
           </Link>
         </div>

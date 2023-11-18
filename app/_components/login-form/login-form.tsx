@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -65,6 +65,27 @@ const LoginForm = () => {
     });
   };
 
+  useEffect(() => {
+    const isAccessTokenValid = () => {
+      const expireDateObject = new Date(
+        localStorage.getItem("access_token_expire_date") as never
+      );
+
+      const expireTimestamp = Math.floor(expireDateObject.getTime() / 1000);
+
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+
+      if (
+        expireTimestamp > currentTimestamp &&
+        localStorage.getItem("isRemembered") === "true"
+      ) {
+        router.push("/products");
+      }
+    };
+
+    isAccessTokenValid();
+  }, [router]);
+
   return (
     <form className="w-3/5 flex flex-col gap-6 border border-hiwebGray-400 rounded-xl px-10 py-14">
       <div className="flex flex-col gap-2">
@@ -108,7 +129,7 @@ const LoginForm = () => {
       </div>
       <button
         className="w-full bg-hiwebGreen-500 text-white rounded-lg transition-colors py-3 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900 disabled:text-hiwebGray-700 disabled:bg-hiwebGray-100"
-        disabled={!isValid}
+        disabled={!isValid || isPending}
         onClick={(e) => handleClick(e)}
       >
         {isPending ? <Loading /> : <span>ورود</span>}

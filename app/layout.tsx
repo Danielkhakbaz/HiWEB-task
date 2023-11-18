@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const vazirFont = Vazirmatn({ subsets: ["latin"] });
+const vazirFont = Vazirmatn({ subsets: ["arabic"] });
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (

@@ -14,5 +14,32 @@ export const useAPI = () => {
     });
   };
 
-  return { getProducts };
+  const addProduct = async ({
+    ProductTitle,
+    ProductPrice,
+    Description,
+    file,
+  }: {
+    ProductTitle: string;
+    ProductPrice: number;
+    Description: string;
+    file: File | undefined;
+  }) => {
+    return await API.post(
+      "/General/Product/AddProduct",
+      {
+        ProductTitle,
+        ProductPrice,
+        Description,
+        file,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  };
+
+  return { getProducts, addProduct };
 };
