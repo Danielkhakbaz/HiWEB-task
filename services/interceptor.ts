@@ -35,14 +35,19 @@ API.interceptors.response.use(
         case 401: {
           const { refreshAccessToken } = useAuth();
 
-          const token = await refreshAccessToken();
+          const data = await refreshAccessToken();
 
           if (!isRefreshing) {
             isRefreshing = true;
 
             isRefreshing = false;
-            onRefreshed(token);
+            onRefreshed(data.access_token);
           }
+
+          localStorage.setItem(
+            "access_token_expire_date",
+            data.expire_access_token
+          );
 
           const retryOriginalRequest = new Promise((resolve) => {
             addSubscriber((newToken: string) => {

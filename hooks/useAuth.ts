@@ -31,9 +31,9 @@ export const useAuth = () => {
         refreshToken,
       });
 
-      const { access_token } = response.data.accessToken;
+      const data = response.data.accessToken;
 
-      return access_token;
+      return data;
     } catch {
       redirectToLogin();
     }
