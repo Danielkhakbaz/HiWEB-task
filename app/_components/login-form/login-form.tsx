@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -8,9 +9,11 @@ import { toast } from "react-toastify";
 import Loading from "app/loading";
 
 const LoginForm = () => {
+  const [isRemembered, setIsRemembered] = useState<boolean>(false);
+
   const { login } = useAuth();
 
-  const navigate = useRouter();
+  const router = useRouter();
 
   const {
     register,
@@ -24,8 +27,12 @@ const LoginForm = () => {
       localStorage.setItem("username", data.userName);
       localStorage.setItem("access_token", data.accessToken.access_token);
       localStorage.setItem("refresh_token", data.accessToken.refresh_token);
+      localStorage.setItem(
+        "access_token_expire_date",
+        data.accessToken.expire_access_token
+      );
 
-      navigate.push("/products");
+      router.push("/products");
     },
     onError: (error: {
       response: {
@@ -49,6 +56,8 @@ const LoginForm = () => {
 
   const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    localStorage.setItem("isRemembered", isRemembered.toString());
 
     mutate({
       username: watch("username"),
@@ -88,6 +97,10 @@ const LoginForm = () => {
           className="text-sm border border-hiwebGray-400 rounded-lg p-2.5"
           type="checkbox"
           placeholder="کلمه عبور..."
+          value={isRemembered ? "true" : "false"}
+          onChange={() => {
+            setIsRemembered((prevValue) => !prevValue);
+          }}
         />
         <label className="text-hiwebGray-300" htmlFor="rememberme">
           مرا به خاطر بسپار

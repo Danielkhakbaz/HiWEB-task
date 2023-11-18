@@ -20,7 +20,7 @@ API.interceptors.response.use(
     return response;
   },
   async (error) => {
-    // const originalRequest = error.config;
+    const originalRequest = error.config;
 
     if (error.response) {
       switch (error.response.status) {
@@ -29,14 +29,27 @@ API.interceptors.response.use(
 
           const token = await refreshAccessToken();
 
-          // originalRequest._retry = false;
+          originalRequest._retry = false;
 
-          // originalRequest.headers["Authorization"] = `Bearer ${token}`;
+          originalRequest.headers["Authorization"] = `Bearer ${token}`;
 
-          // return API(originalRequest);
+          return API(originalRequest);
         }
-        default:
+        case 404: {
+          console.error(error.message);
+
           break;
+        }
+        case 500: {
+          console.error(error.message);
+
+          break;
+        }
+        default: {
+          console.error(error.message);
+
+          break;
+        }
       }
     }
   }

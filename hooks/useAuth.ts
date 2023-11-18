@@ -28,13 +28,13 @@ export const useAuth = () => {
         refreshToken: localStorage.getItem("refresh_token"),
       });
 
-      const { token } = response.data;
+      const { access_token } = response.data.accessToken;
 
-      localStorage.setItem("access_token", token);
+      localStorage.setItem("access_token", access_token);
 
-      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      API.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
-      return token;
+      return access_token;
     } catch {
       redirectToLogin();
     }
