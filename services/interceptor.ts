@@ -8,19 +8,16 @@ export const API = axios.create({
 const { refreshAccessToken } = useAuth();
 
 let isRefreshing = false;
-let refreshSubscribers: ((newToken: string) => void)[] = [];
+let refreshSubscribers: any[] = [];
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
 
   if (config.url !== "/security/userLogin/login") {
     if (token) {
-      if (config.url !== "/Security/UserLogin/RefreshToken") {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+      config.headers.Authorization = `Bearer ${token}`;
     } else {
       window.location.href = "/";
-
       alert("شما ابتدا باید به سامانه وارد شوید!");
     }
   }
@@ -40,38 +37,27 @@ API.interceptors.response.use(
         case 401: {
           if (!isRefreshing) {
             isRefreshing = true;
-
             const token = await refreshAccessToken();
 
             isRefreshing = false;
             onRefreshed(token);
           }
 
-          const retryOriginalRequest = new Promise(() => {
+          const retryOriginalRequest = new Promise((resolve) => {
             addSubscriber((newToken: string) => {
               originalRequest.headers.Authorization = `Bearer ${newToken}`;
-
-              return API(originalRequest);
+              resolve(axios(originalRequest));
             });
           });
 
           return retryOriginalRequest;
         }
-        case 404: {
+        case 404:
+        case 500:
           console.error(error.message);
-
           break;
-        }
-        case 500: {
+        default:
           console.error(error.message);
-
-          break;
-        }
-        default: {
-          console.error(error.message);
-
-          break;
-        }
       }
     }
   }
