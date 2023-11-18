@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import ShowUsername from "layout/navbar/show-username/show-username";
-import LogoutButton from "layout/navbar/logout-button/logout-button";
 import AddModal from "app/products/_components/add-modal/add-modal";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaPowerOff } from "react-icons/fa6";
 
 const Navbar = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -22,7 +22,15 @@ const Navbar = () => {
             افزودن محصول
           </button>
           <ShowUsername />
-          <LogoutButton />
+          <Link href="/">
+            <button
+              className="text-hiwebRed-500 flex items-center gap-1 rounded-lg transition-colors px-3 py-2 hover:bg-red-50 active:bg-red-100"
+              onClick={() => localStorage.clear()}
+            >
+              <FaPowerOff />
+              خروج
+            </button>
+          </Link>
         </section>
       </nav>
       {showModal && <AddModal setShowModal={setShowModal} />}
