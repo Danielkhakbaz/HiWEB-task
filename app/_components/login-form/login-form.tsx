@@ -27,27 +27,24 @@ const LoginForm = () => {
 
   const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: login,
-    onSuccess: ({ data: { data } }) => {
-      localStorage.setItem("username", data.userName);
-      localStorage.setItem("access_token", data.accessToken.access_token);
-      localStorage.setItem("refresh_token", data.accessToken.refresh_token);
+    onSuccess: ({ data }) => {
+      localStorage.setItem("username", data.data.userName);
+      localStorage.setItem("access_token", data.data.accessToken.access_token);
+      localStorage.setItem(
+        "refresh_token",
+        data.data.accessToken.refresh_token
+      );
       localStorage.setItem(
         "access_token_expire_date",
-        data.accessToken.expire_access_token
+        data.data.accessToken.expire_access_token
       );
 
       goToProductsPage = setTimeout(() => {
         router.push("/products");
       }, 2000);
     },
-    onError: (error: {
-      response: {
-        data: {
-          error: string;
-        };
-      };
-    }) => {
-      toast.error(error.response.data.error, {
+    onError: (error) => {
+      toast.error(error.message, {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,

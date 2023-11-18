@@ -8,8 +8,14 @@ export const API = axios.create({
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
 
-  if (config.url !== "/Security/UserLogin/Login" && token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (config.url !== "/security/userLogin/login") {
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      window.location.href = "/";
+
+      alert("شما ابتدا باید به سامانه وارد شوید!");
+    }
   }
 
   return config;
@@ -29,7 +35,7 @@ API.interceptors.response.use(
 
           const token = await refreshAccessToken();
 
-          originalRequest._retry = false;
+          originalRequest._retry = true;
 
           originalRequest.headers["Authorization"] = `Bearer ${token}`;
 

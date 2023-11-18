@@ -22,10 +22,13 @@ export const useAuth = () => {
   };
 
   const refreshAccessToken = async () => {
+    let username = localStorage.getItem("username");
+    let refreshToken = localStorage.getItem("refresh_token");
+
     try {
       const response = await API.post("/Security/UserLogin/RefreshToken", {
-        username: localStorage.getItem("username"),
-        refreshToken: localStorage.getItem("refresh_token"),
+        username,
+        refreshToken,
       });
 
       const { access_token } = response.data.accessToken;

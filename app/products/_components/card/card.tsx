@@ -4,9 +4,8 @@ type CardProps = {
   description: string;
   id: string;
   imageUrl: string;
-  rate: number;
   title: string;
-  view: number;
+  price: number;
 };
 
 const Card = ({ item }: { item: CardProps }) => {
@@ -28,7 +27,7 @@ const Card = ({ item }: { item: CardProps }) => {
         </p>
         <p className="text-sm">
           <span className="text-hiwebGray-300">قیمت:</span>{" "}
-          {item.view.toLocaleString("fa")}
+          {item.price ? item.price.toLocaleString("fa") : "-"}
         </p>
       </section>
     </div>
