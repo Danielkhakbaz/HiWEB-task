@@ -93,9 +93,9 @@ const LoginForm = () => {
     };
   }, [router]);
 
-  if (isSuccess) {
+  if (!isSuccess) {
     return (
-      <div className="w-3/5 h-4/5 flex flex-col justify-center items-center gap-10 border border-hiwebGray-400 rounded-xl px-10 py-14">
+      <div className="w-[482px] h-[437px] flex flex-col justify-center items-center gap-10 border border-hiwebGray-400 rounded-xl px-10 py-14">
         <Image width={64} height={64} src={SuccessfulLogin} alt="" />
         <p className="text-hiwebGreen-500">ورود شما با موفقیت انجام شد.</p>
         <Loading />
@@ -104,14 +104,14 @@ const LoginForm = () => {
   }
 
   return (
-    <form className="w-3/5 flex flex-col justify-center gap-6 border border-hiwebGray-400 rounded-xl px-10 py-14">
+    <form className="w-[482px] h-[437px] flex flex-col justify-center gap-6 border border-hiwebGray-400 rounded-xl px-12 py-[58px]">
       <div className="flex flex-col gap-2">
         <label className="text-hiwebGray-300" htmlFor="username">
           نام کاربری
         </label>
         <input
           id="username"
-          className="text-sm border border-hiwebGray-300 rounded-lg p-2.5"
+          className="w-full h-12 text-sm border border-hiwebGray-300 rounded-lg p-2.5"
           type="text"
           placeholder="نام کاربری..."
           {...register("username", { required: true })}
@@ -123,7 +123,7 @@ const LoginForm = () => {
         </label>
         <input
           id="password"
-          className="text-sm border border-hiwebGray-400 rounded-lg p-2.5"
+          className="w-full h-12 text-sm border border-hiwebGray-400 rounded-lg p-2.5"
           type="password"
           placeholder="کلمه عبور..."
           {...register("password", { required: true })}
@@ -145,7 +145,7 @@ const LoginForm = () => {
         </label>
       </div>
       <button
-        className="w-full bg-hiwebGreen-500 text-white rounded-lg transition-colors py-3 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900 disabled:text-hiwebGray-700 disabled:bg-hiwebGray-100"
+        className="w-full h-12 bg-hiwebGreen-500 text-white rounded-lg transition-colors py-3 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900 disabled:text-hiwebGray-700 disabled:bg-hiwebGray-100"
         disabled={!isValid || isPending}
         onClick={(e) => handleClick(e)}
       >

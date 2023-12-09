@@ -40,7 +40,7 @@ const ProductsPage = () => {
     <>
       {data?.pages[0].data.data.totalRowCount !== 0 ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-10 py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 justify-center gap-10 py-4">
             {data?.pages.map((page) =>
               page.data.data.list.map((item: CardProps) => (
                 <Card key={item.id} item={item} />

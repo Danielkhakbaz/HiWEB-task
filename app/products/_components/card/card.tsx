@@ -10,14 +10,14 @@ type CardProps = {
 
 const Card = ({ item }: { item: CardProps }) => {
   return (
-    <div className="w-full h-full flex flex-col border rounded-lg shadow">
+    <div className="w-[412px] h-[376px] flex flex-col border rounded-lg shadow">
       {
         // Issue: Unable to use <Image /> tag from next/image.
         // Description: The tag is throwing an error related to an incorrect SSL certificate, although I believe this shouldn't be the case.
         // Example usage:
         // <Image width="..." height="..." src="..." alt="..." />
       }
-      <img className="rounded-lg" src={item.imageUrl} alt="" />
+      <img className="w-full h-[184px] rounded-lg" src={item.imageUrl} alt="" />
       <section className="h-full flex flex-col justify-between gap-4 p-4">
         <h4>{item.title}</h4>
         <p className="text-hiwebGray-500 text-xs flex-1">

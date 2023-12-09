@@ -15,7 +15,7 @@ const Navbar = () => {
         <p className="text-hiwebGray-500">لیست محصولات</p>
         <section className="flex items-center gap-6">
           <button
-            className="bg-hiwebGreen-500 text-white flex items-center gap-2 rounded-lg transition-colors px-12 py-2 hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900"
+            className="w-[266px] h-[47px] bg-hiwebGreen-500 text-white flex justify-center items-center gap-2 rounded-lg transition-colors hover:bg-hiwebGreen-700 active:bg-hiwebGreen-900"
             onClick={() => setShowModal(true)}
           >
             <FaPlus />
