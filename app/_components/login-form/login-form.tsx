@@ -93,7 +93,7 @@ const LoginForm = () => {
     };
   }, [router]);
 
-  if (!isSuccess) {
+  if (isSuccess) {
     return (
       <div className="w-[482px] h-[437px] flex flex-col justify-center items-center gap-10 border border-hiwebGray-400 rounded-xl px-10 py-14">
         <Image width={64} height={64} src={SuccessfulLogin} alt="" />
