@@ -19,9 +19,7 @@ const LoginPage = async () => {
           src={HiWEBLogo}
           alt="HiWeb's logo"
         />
-        {/* <div className="w-[386px] h-[321px] flex flex-1 justify-center items-center"> */}
         <LoginForm />
-        {/* </div> */}
       </div>
     </main>
   );
